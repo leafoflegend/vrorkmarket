@@ -1,20 +1,17 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import store from './store';
-import TestVR from './components/testVR';
+import Container from './components';
 
 class App extends Component {
   render() {
     return (
       <Provider store={ store }>
-        <div
-          className="App"
-          style={{
-            width: '100%',
-            height: '1200px',
-          }}
-        >
-          <TestVR />
+        <div className="App">
+          <MuiThemeProvider>
+            <Container />
+          </MuiThemeProvider>
         </div>
       </Provider>
     );
