@@ -1,17 +1,24 @@
 import axios from 'axios';
 
 const Types = {
-  OPEN_MODAL: 'OPEN_MODAL',
-  CLOSE_MODAL: 'CLOSE_MODAL',
+  SET_ASSIGNMENTS: 'SET_ASSIGNMENTS',
 };
 
 const Actions = {
-  openModal: () => ({
-    type: Types.OPEN_MODAL,
+  setAssignments: (assignments) => ({
+    type: Types.SET_ASSIGNMENTS,
+    data: assignments,
   }),
-  closeModal: () => ({
-    type: Types.CLOSE_MODAL,
-  })
+  fetchAssignments: () => async (dispatch) => {
+    try {
+      const response = await axios.get('/some/route');
+      const { assignments } = response.data;
+      dispatch(this.setAssignments(assignments));
+    } catch (err) {
+      console.log('Logging in failed.');
+      console.error(err);
+    }
+  },
 };
 
 export {

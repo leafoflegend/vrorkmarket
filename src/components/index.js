@@ -1,167 +1,122 @@
 import React, { Component } from 'react';
 import {
 	WMAppBar,
-	WMModal,
+	WMPaper,
 	WMIconButton,
 	WMFontIcon,
-	WMFlatButton,
-	WMTextField,
-	WMDatePicker,
-	WMCheckbox,
 } from '@workmarket/front-end-components';
-import {
-	WMZeroState,
-} from '@workmarket/front-end-patterns';
 import { connect } from 'react-redux';
 import { Actions } from '../store/actions';
 
 class Container extends Component {
 	render () {
 		const {
-			modalOpen,
-			openModal,
-			closeModal,
+			assignments,
+			currentAssignment,
 		} = this.props;
 
 		return (
-			<div>
+			<div
+				style={{
+					fontFamily: 'Open Sans',
+				}}
+			>
 				<WMAppBar
-					title={ 'Deep Work' }
+					title={ 'Most Recommended Assignments' }
 					showMenuIconButton={ false }
 				/>
-				<WMZeroState
-					headerText="Deep Work"
-					buttonLabel="Find Work"
-					onButtonClick={ openModal }
-					style={ { backgroundColor: '#fff' } }
-				/>
-				<WMModal
-					open={ modalOpen }
-					onRequestClose={ closeModal }
-					title={
-						<div
-							style={{
-								display: 'flex',
-								flexDirection: 'row',
-								justifyContent: 'space-between',
-								alignItems: 'center',
-								borderBottom: 'solid 1px gray',
-								padding: 0,
-							}}
-						>
-							<div
-								style={{
-									display: 'flex',
-									flexDirection: 'row',
-									justifyContent: 'flex-start',
-									marginLeft: '10px',
-								}}
-							>
-								<h3> Find Work </h3>
-							</div>
-							<div
-								style={{
-									display: 'flex',
-									flexDirection: 'row',
-									justifyContent: 'flex-end',
-								}}
-							>
-								<WMIconButton
-									onClick={ closeModal }
-								>
-									<WMFontIcon
-										className={ 'material-icons' }
-										color={ 'black' }
-										hoverColor={ 'gray' }
-									>
-										close
-									</WMFontIcon>
-								</WMIconButton>
-							</div>
-						</div>
-					}
-					actions={
-						<div
-							style={{
-								marginRight: '10px',
-								marginTop: '10px',
-								marginBottom: '10px',
-							}}
-						>
-							<WMFlatButton
-								label={ 'Find Work' }
-								onClick={ () => {} }
-							/>
-						</div>
-					}
-					actionsContainerStyle={{
-						padding: 0,
-						borderTop: 'solid 1px gray',
+				<div
+					style={{
+						display: 'flex',
+						flexDirection: 'row',
+						justifyContent: 'space-around',
+						alignItems: 'center',
 					}}
 				>
-					<div>
-						<div
-							style={{
-								display: 'flex',
-								flexDirection: 'row',
-								justifyContent: 'flex-start',
-								alignItems: 'center',
-							}}
-						>
-							<span> Search Text </span>
-							<WMTextField
-								onChange={ () => {} }
-							/>
+					<h3> { `${currentAssignment}/${assignments.length} Highly Reccomended Assignments` } </h3>
+				</div>
+				<div
+					style={{
+						display: 'flex',
+						flexDirection: 'row',
+						justifyContent: 'space-around',
+						alignItems: 'center',
+					}}
+				>
+					<div
+						style={{
+							display: 'flex',
+							flexDirection: 'row',
+							justifyContent: 'space-around',
+							alignItems: 'center',
+						}}
+					>
+						<div>
+							<WMIconButton>
+								<WMFontIcon
+									className={ 'material-icons' }
+								>
+									navigate_before
+								</WMFontIcon>
+							</WMIconButton>
 						</div>
 						<div
 							style={{
-								display: 'flex',
-								flexDirection: 'row',
-								justifyContent: 'flex-start',
-								alignItems: 'center',
+								marginTop: '20px',
 							}}
 						>
-							<span> Strike Price </span>
-							<WMTextField />
+							<WMPaper
+								zDepth={ 3 }
+								style={{
+									width: '400px',
+									height: '500px',
+									display: 'flex',
+									flexDirection: 'column',
+									justifyContent: 'flex-start',
+									alignItems: 'center',
+								}}
+							>
+								<div
+									style={{
+										display: 'flex',
+										flexDirection: 'column',
+										justifyContent: 'flex-start',
+										alignItems: 'center',
+										borderBottom: 'solid 1px gray',
+										width: '90%',
+									}}
+								>
+									<h3> Some Job </h3>
+								</div>
+
+							</WMPaper>
 						</div>
-						<div
-							style={{
-								display: 'flex',
-								flexDirection: 'row',
-								justifyContent: 'flex-start',
-								alignItems: 'center',
-							}}
-						>
-							<span> Date </span>
-							<WMDatePicker id={ 'date-picker' } />
-						</div>
-						<div
-							style={{
-								display: 'flex',
-								flexDirection: 'row',
-								justifyContent: 'flex-start',
-								alignItems: 'center',
-							}}
-						>
-							<span> Schedule Anytime? </span>
-							<WMCheckbox />
+						<div>
+							<WMIconButton>
+								<WMFontIcon
+									className={ 'material-icons' }
+								>
+									navigate_next
+								</WMFontIcon>
+							</WMIconButton>
 						</div>
 					</div>
-				</WMModal>
+				</div>
 			</div>
 		)
 	}
 }
 
 const mapStateToProps = ({
-	modalOpen,
+	assignments,
+	currentAssignment,
 }) => ({
-	modalOpen,
+	assignments,
+	currentAssignment,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	openModal: () => { dispatch(Actions.openModal()) },
-	closeModal: () => { dispatch(Actions.closeModal()) },
+	fetchAssignments: () => { dispatch(Actions.fetchAssignments()); },
 });
 
 const ConnectedContainer = connect(mapStateToProps, mapDispatchToProps)(Container);

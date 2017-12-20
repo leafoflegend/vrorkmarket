@@ -1,3 +1,27 @@
+import moment from 'moment';
+
 export default {
-  modalOpen: false,
+  assignments: [
+    {
+      title: '1',
+      description: 'Im some assignment',
+      date: moment(),
+    },
+    {
+      title: '1',
+      description: 'Im some assignment',
+      date: moment(),
+    },
+    {
+      title: '1',
+      description: 'Im some assignment',
+      date: moment(),
+    },
+    {
+      title: '1',
+      description: 'Im some assignment',
+      date: moment(),
+    },
+  ],
+  currentAssignment: 1,
 };

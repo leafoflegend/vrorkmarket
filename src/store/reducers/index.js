@@ -6,15 +6,10 @@ export default (state = initialState, action) => {
   console.log('action: ', action);
 
   switch (action.type) {
-  case Types.OPEN_MODAL:
+  case Types.SET_ASSIGNMENTS:
     return {
       ...state,
-      modalOpen: true,
-    };
-  case Types.CLOSE_MODAL:
-    return {
-      ...state,
-      modalOpen: false,
+      assignments: action.data,
     };
   default:
     return state;
