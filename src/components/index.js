@@ -136,13 +136,26 @@ class Container extends Component {
 										flexDirection: 'row',
 										justifyContent: 'flex-start',
 										alignItems: 'flex-start',
-										color: 'gray',
 										width: '90%',
 										marginTop: '5px',
-										fontSize: '14px',
 									}}
 								>
-									{ this.activeAssignment.description }
+									<span
+										style={{
+											fontWeight: 'bold',
+										}}
+									>
+										{ 'Description: ' }
+									</span>
+									<span
+										style={{
+											fontSize: '14px',
+											color: 'gray',
+											marginLeft: '0.5em',
+										}}
+									>
+										{ this.activeAssignment.description }
+									</span>
 								</div>
 								<div
 									style={{
@@ -158,7 +171,6 @@ class Container extends Component {
 										justifyContent: 'flex-start',
 										alignItems: 'center',
 										paddingTop: '1em',
-										paddingBottom: '1em',
 									}}
 								>
 									<span
@@ -175,6 +187,31 @@ class Container extends Component {
 										}}
 									>
 										{ convertToCurrency(this.activeAssignment.price) }
+									</span>
+								</div>
+								<div
+									style={{
+										width: '90%',
+										display: 'flex',
+										flexDirection: 'row',
+										justifyContent: 'flex-start',
+										alignItems: 'center',
+										paddingBottom: '1em',
+									}}
+								>
+									<span
+										style={{
+											fontWeight: 'bold',
+										}}
+									>
+										{ 'Date: ' }
+									</span>
+									<span
+										style={{
+											marginLeft: '0.5em',
+										}}
+									>
+										{ this.activeAssignment.date.format('MMMM Do, YYYY') }
 									</span>
 								</div>
 								<div
