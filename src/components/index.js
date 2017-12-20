@@ -9,10 +9,15 @@ import { connect } from 'react-redux';
 import { Actions } from '../store/actions';
 
 class Container extends Component {
+	componentDidMount () {
+		this.props.fetchAssignments();
+	}
+
 	render () {
 		const {
 			assignments,
 			currentAssignment,
+			setAssignment,
 		} = this.props;
 
 		return (
@@ -52,7 +57,12 @@ class Container extends Component {
 						}}
 					>
 						<div>
-							<WMIconButton>
+							<WMIconButton
+								disabled={ currentAssignment <= 1 }
+								onClick={ () => {
+									setAssignment(currentAssignment - 1);
+								} }
+							>
 								<WMFontIcon
 									className={ 'material-icons' }
 								>
@@ -92,7 +102,12 @@ class Container extends Component {
 							</WMPaper>
 						</div>
 						<div>
-							<WMIconButton>
+							<WMIconButton
+								disabled={ currentAssignment >= assignments.length }
+								onClick={ () => {
+									setAssignment(currentAssignment + 1);
+								} }
+							>
 								<WMFontIcon
 									className={ 'material-icons' }
 								>
@@ -117,6 +132,7 @@ const mapStateToProps = ({
 
 const mapDispatchToProps = (dispatch) => ({
 	fetchAssignments: () => { dispatch(Actions.fetchAssignments()); },
+	setAssignment: (num) => { dispatch(Actions.setAssignment(num)); },
 });
 
 const ConnectedContainer = connect(mapStateToProps, mapDispatchToProps)(Container);

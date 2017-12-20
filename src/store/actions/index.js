@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const Types = {
   SET_ASSIGNMENTS: 'SET_ASSIGNMENTS',
+  SET_CURRENT_ASSIGNMENT: 'SET_CURRENT_ASSIGNMENT',
 };
 
 const Actions = {
@@ -19,6 +20,10 @@ const Actions = {
       console.error(err);
     }
   },
+  setAssignment: (num) => ({
+    type: Types.SET_CURRENT_ASSIGNMENT,
+    data: num,
+  }),
 };
 
 export {

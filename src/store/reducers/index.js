@@ -11,6 +11,11 @@ export default (state = initialState, action) => {
       ...state,
       assignments: action.data,
     };
+  case Types.SET_CURRENT_ASSIGNMENT:
+    return {
+      ...state,
+      currentAssignment: action.data,
+    };
   default:
     return state;
   }
