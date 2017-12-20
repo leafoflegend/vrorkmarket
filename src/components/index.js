@@ -4,13 +4,45 @@ import {
 	WMPaper,
 	WMIconButton,
 	WMFontIcon,
+	WMText,
+	WMFlatButton,
 } from '@workmarket/front-end-components';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import { Actions } from '../store/actions';
+
+const convertToCurrency = (num) => {
+	const [dollars, cents] = num
+		.toFixed(2)
+		.toString()
+		.split('.');
+
+	let spacesFromStart = 0;
+
+	return `$${dollars
+		.split('')
+		.reduceRight((str, digit, i, array) => {
+			spacesFromStart += 1;
+			return (!(spacesFromStart % 3) && spacesFromStart !== array.length)
+				? `,${digit}${str}` // eslint-disable-line
+				: `${digit}${str}`;
+		}, '')}.${cents}`;
+};
 
 class Container extends Component {
 	componentDidMount () {
 		this.props.fetchAssignments();
+	}
+
+	get activeAssignment() {
+		return this.props.assignments[this.props.currentAssignment - 1]
+			? this.props.assignments[this.props.currentAssignment - 1]
+			: {
+				price: 0,
+				description: '',
+				title: '',
+				date: moment(),
+			}
 	}
 
 	render () {
@@ -79,7 +111,6 @@ class Container extends Component {
 								zDepth={ 3 }
 								style={{
 									width: '400px',
-									height: '500px',
 									display: 'flex',
 									flexDirection: 'column',
 									justifyContent: 'flex-start',
@@ -96,9 +127,55 @@ class Container extends Component {
 										width: '90%',
 									}}
 								>
-									<h3> Some Job </h3>
+									<h3> { this.activeAssignment.title } </h3>
 								</div>
-
+								<div>
+									<WMText>
+										{ this.activeAssignment.description }
+									</WMText>
+								</div>
+								<div
+									style={{
+										width: '90%',
+										height: '10px',
+									}}
+								/>
+								<div
+									style={{
+										width: '90%',
+										display: 'flex',
+										flexDirection: 'row',
+										justifyContent: 'flexStart',
+										alignItems: 'center',
+										paddingTop: '1em',
+										paddingBottom: '1em',
+									}}
+								>
+									<span> { 'Price: ' } </span>
+									<span
+										style={{
+											color: 'green',
+											marginLeft: '0.5em',
+										}}
+									>
+										{ convertToCurrency(this.activeAssignment.price) }
+									</span>
+								</div>
+								<div
+									style={{
+										marginTop: '10px',
+										display: 'flex',
+										flexDirection: 'row',
+										width: '100%',
+										height: '50px',
+										justifyContent: 'center',
+										alignItems: 'center',
+									}}
+								>
+									<WMFlatButton
+										label={ 'Apply for Assignment' }
+									/>
+								</div>
 							</WMPaper>
 						</div>
 						<div>
