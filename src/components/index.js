@@ -4,7 +4,6 @@ import {
 	WMPaper,
 	WMIconButton,
 	WMFontIcon,
-	WMText,
 	WMFlatButton,
 } from '@workmarket/front-end-components';
 import { connect } from 'react-redux';
