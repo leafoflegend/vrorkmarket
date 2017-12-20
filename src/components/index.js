@@ -129,10 +129,20 @@ class Container extends Component {
 								>
 									<h3> { this.activeAssignment.title } </h3>
 								</div>
-								<div>
-									<WMText>
-										{ this.activeAssignment.description }
-									</WMText>
+								<div
+									style={{
+										textAlign: 'left',
+										display: 'flex',
+										flexDirection: 'row',
+										justifyContent: 'flex-start',
+										alignItems: 'flex-start',
+										color: 'gray',
+										width: '90%',
+										marginTop: '5px',
+										fontSize: '14px',
+									}}
+								>
+									{ this.activeAssignment.description }
 								</div>
 								<div
 									style={{
@@ -145,13 +155,19 @@ class Container extends Component {
 										width: '90%',
 										display: 'flex',
 										flexDirection: 'row',
-										justifyContent: 'flexStart',
+										justifyContent: 'flex-start',
 										alignItems: 'center',
 										paddingTop: '1em',
 										paddingBottom: '1em',
 									}}
 								>
-									<span> { 'Price: ' } </span>
+									<span
+										style={{
+											fontWeight: 'bold',
+										}}
+									>
+										{ 'Price: ' }
+									</span>
 									<span
 										style={{
 											color: 'green',
